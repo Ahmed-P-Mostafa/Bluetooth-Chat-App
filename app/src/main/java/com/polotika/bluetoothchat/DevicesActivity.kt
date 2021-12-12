@@ -7,22 +7,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.polotika.bluetoothchat.databinding.ActivityDevicesBinding
-import android.app.Activity
-import android.util.Log
-
-import android.widget.TextView
-
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
 
 
 class DevicesActivity : AppCompatActivity() {
@@ -60,11 +56,12 @@ class DevicesActivity : AppCompatActivity() {
             }
         }
 
-        val deviceFoundIntentFilter :IntentFilter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-        registerReceiver(bluetoothDevicesListener,deviceFoundIntentFilter)
+        val deviceFoundIntentFilter: IntentFilter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+        registerReceiver(bluetoothDevicesListener, deviceFoundIntentFilter)
 
-        val discoverFinishedIntentFilter :IntentFilter = IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
-        registerReceiver(bluetoothDevicesListener,discoverFinishedIntentFilter)
+        val discoverFinishedIntentFilter: IntentFilter =
+            IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
+        registerReceiver(bluetoothDevicesListener, discoverFinishedIntentFilter)
 
         binding.listPairedDevices.onItemClickListener =
             OnItemClickListener { _, view, _, _ ->
@@ -83,18 +80,20 @@ class DevicesActivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent) {
             val action = intent.action
             if (BluetoothDevice.ACTION_FOUND == action) {
-                val bluetoothDevice :BluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)!!
-                if (bluetoothDevice.bondState != BluetoothDevice.BOND_BONDED){
-                    availableDevicesAdapter?.add(bluetoothDevice.name + "\n"+bluetoothDevice.address)
+                val bluetoothDevice: BluetoothDevice =
+                    intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)!!
+                if (bluetoothDevice.bondState != BluetoothDevice.BOND_BONDED) {
+                    availableDevicesAdapter?.add(bluetoothDevice.name + "\n" + bluetoothDevice.address)
                 }
 
-            }else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED == action){
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED == action) {
                 binding.progressBar.visibility = GONE
                 if (availableDevicesAdapter?.isEmpty == true)
-                    Snackbar.make(binding.root,"No available devices found",Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "No available devices found", Snackbar.LENGTH_SHORT)
+                        .show()
                 else
-                    Snackbar.make(binding.root,"Click the device to chat",Snackbar.LENGTH_SHORT).show()
-
+                    Snackbar.make(binding.root, "Click the device to chat", Snackbar.LENGTH_SHORT)
+                        .show()
 
 
             }

@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-   <ListView
-       android:id="@+id/conversation_rv"
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       android:background="#efefe2"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintBottom_toTopOf="@id/text_input_tv"/>
+    <ListView
+        android:id="@+id/conversation_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#efefe2"
+        app:layout_constraintBottom_toTopOf="@id/text_input_tv"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/text_input_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:hint="enter your message"
+        android:paddingHorizontal="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/send_btn"
-        android:hint="enter your message"
-        android:paddingHorizontal="8dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/send_btn"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="Send"
         android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@id/text_input_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text_input_tv"
-        app:layout_constraintBottom_toBottomOf="@id/text_input_tv"/>
+        app:layout_constraintTop_toTopOf="@id/text_input_tv" />
 </androidx.constraintlayout.widget.ConstraintLayout>

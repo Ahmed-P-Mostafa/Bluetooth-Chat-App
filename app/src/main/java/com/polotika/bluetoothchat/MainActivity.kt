@@ -17,7 +17,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private val handler: Handler = Handler { message ->
         when (message.what) {
-            MESSAGE_STATE_CHANGED ->  {
+            MESSAGE_STATE_CHANGED -> {
                 when (message.arg1) {
                     STATE_NONE -> setState("Not Connected")
                     STATE_LISTEN -> setState("Not Connected")
@@ -121,13 +120,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        adapterMainChat = ArrayAdapter(this,R.layout.device_item)
+        adapterMainChat = ArrayAdapter(this, R.layout.device_item)
         binding.conversationRv.adapter = adapterMainChat
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         chatUtils = ChatUtils(context = this, handler = handler)
         binding.sendBtn.setOnClickListener {
             val message = binding.textInputTv.text.toString()
-            if (message.isNotBlank()){
+            if (message.isNotBlank()) {
                 binding.textInputTv.setText("")
                 chatUtils.write(message.toByteArray())
             }
@@ -174,7 +173,6 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.ACCESS_FINE_LOCATION
         ) == PERMISSION_GRANTED
     }
-
 
 
     private fun showPermissionDeniedDialog() {
