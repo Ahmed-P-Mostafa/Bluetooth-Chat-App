@@ -30,7 +30,6 @@ import com.polotika.bluetoothchat.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
-    private lateinit var homeViewModel: MainActivityVIewModel
     private lateinit var connectedDevice: String
     private lateinit var adapterMainChat: ArrayAdapter<String>
     private lateinit var bluetoothAdapter: BluetoothAdapter
@@ -81,11 +80,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
 
-        homeViewModel =
-            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
-                MainActivityVIewModel::class.java
-            )
-        homeViewModel.init(this)
+    
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
